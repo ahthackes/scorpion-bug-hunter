@@ -1,0 +1,9 @@
+# One target per line -- domains or URLs copied from a bug bounty program's
+# scope page (HackerOne, Bugcrowd, Intigriti, etc).
+# Lines starting with # are ignored.
+#
+# Copy this file to targets.txt (git-ignored) and fill in your real targets.
+#
+# example.com
+# *.example.com
+# https://app.example.com

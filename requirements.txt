@@ -1,0 +1,33 @@
+# Core
+click>=8.1               # CLI framework
+pyyaml>=6.0               # config parsing
+
+# Persistence: stdlib sqlite3 is used directly (see db/models.py) so the
+# tool runs with zero extra deps while the pipeline is being built out.
+# Swap in SQLAlchemy + Postgres later by rewriting db/models.py only --
+# nothing else in the codebase talks to sqlite3 directly.
+# sqlalchemy>=2.0
+# alembic>=1.13
+
+# Report templating (reports/generator.py -- renders report.md/.html/.json
+# from reports/templates/*.j2, both independently from the same data, so
+# no markdown-to-HTML conversion library is needed)
+jinja2>=3.1
+# weasyprint>=61.0        # html -> pdf, add if a PDF export is wanted later
+
+# HTTP / networking (used once Tier 1 httpx_probe.py is implemented)
+httpx>=0.27
+tenacity>=8.2             # retries
+
+# Async task handling (added when the scheduler needs real concurrency)
+# celery>=5.3
+# redis>=5.0
+
+# Notifications (added when core/notify.py is implemented)
+# slack-sdk>=3.27
+
+# Dev / test
+pytest>=8.0                # optional -- the test suite also runs under
+                            # stdlib unittest: `python -m unittest discover -s tests`
+black>=24.0
+ruff>=0.3
