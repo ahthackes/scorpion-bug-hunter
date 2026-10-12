@@ -1,0 +1,11 @@
+# Public DNS resolvers used by puredns/massdns for active subdomain
+# brute-forcing. A handful of well-known, reliable resolvers so the tool
+# works out of the box -- swap in a larger, freshly-vetted resolver list
+# (e.g. from trickest/resolvers) for serious engagements, since a short
+# list like this is easy for a target's DNS infra to rate-limit.
+1.1.1.1
+8.8.8.8
+8.8.4.4
+9.9.9.9
+208.67.222.222
+208.67.220.220

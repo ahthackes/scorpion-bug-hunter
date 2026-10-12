@@ -1,0 +1,39 @@
+# Scorpion Bug Hunter -- global settings
+# Per-run overrides can be passed as CLI flags; this file sets the defaults.
+
+run:
+  sequential: true          # process targets.txt one target at a time
+  parallel_targets: 1        # bump later once the single-target pipeline is solid
+  fan_out_subdomains: true   # run Tier 1-3 once per live subdomain, not just the root
+
+scope:
+  # TESTING ONLY: scope enforcement is OFF -- every host discovered from
+  # targets.txt is scanned, no targets/scope/*.json or always_exclude
+  # rules are consulted. Set back to true before running against a real
+  # bug bounty program -- see core/scope_guard.py's ScopeGuard docstring.
+  enforce: false
+
+tiers:
+  tier0:
+    enabled: true
+  tier1:
+    enabled: true
+    rate_limit_rps: 20
+  tier2:
+    enabled: true
+    rate_limit_rps: 10
+  tier3:
+    enabled: false           # must be explicitly turned on with --enable-tier3
+    require_confirmation: true
+
+timeouts:
+  tool_default_seconds: 300
+  tier_default_seconds: 3600
+
+output:
+  base_dir: output
+  keep_raw_tool_output: true
+
+logging:
+  dir: logs
+  level: INFO

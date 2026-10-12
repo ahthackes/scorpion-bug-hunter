@@ -1,0 +1,16 @@
+# Global scope defaults, applied alongside each program's own scope file in
+# targets/scope/<program>.json. Program-specific rules always take priority
+# over these defaults.
+
+defaults:
+  # Never actively scan these, regardless of what a program's scope says,
+  # unless explicitly removed here.
+  always_exclude:
+    - "*.gov"
+    - "*.mil"
+
+  # Tiers that are allowed to run without a program-specific override.
+  max_tier_without_override: 2   # Tier 3 always needs an explicit per-program allow
+
+  # How strictly to interpret wildcard scope entries.
+  wildcard_matching: strict   # strict | permissive

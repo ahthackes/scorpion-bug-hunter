@@ -1,0 +1,15 @@
+# Notification settings -- used by core/notify (wraps the `notify` CLI tool).
+# Leave a channel's webhook blank in .env to disable it.
+
+channels:
+  slack:
+    enabled: false
+  discord:
+    enabled: false
+
+events:
+  target_started: true
+  tier_completed: true
+  finding_discovered: true   # only for confirmed findings, see db/models.py
+  target_report_ready: true
+  run_completed: true

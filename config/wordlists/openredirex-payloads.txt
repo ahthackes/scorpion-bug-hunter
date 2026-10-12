@@ -1,0 +1,10 @@
+//evil.com
+/\evil.com
+https://evil.com
+https:evil.com
+//evil.com/%2f..
+/%09/evil.com
+////evil.com
+https:/evil.com
+/%5cevil.com
+@evil.com

@@ -1,0 +1,13 @@
+services:
+  scorpion:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ../targets:/app/targets
+      - ../output:/app/output
+      - ../logs:/app/logs
+      - ../config:/app/config
+    env_file:
+      - ../.env
+    command: ["--targets", "targets/targets.txt"]
