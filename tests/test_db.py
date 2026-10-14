@@ -39,6 +39,21 @@ class DatabaseTestCase(unittest.TestCase):
         assets = self.db.list_assets(target.id)
         self.assertEqual(len(assets), 1)
 
+    def test_list_assets_by_type_filters_in_sql(self):
+        target = self.db.get_or_create_target("example.com")
+        self.db.add_asset(target.id, "bucket", "example-bucket")
+        self.db.add_asset(target.id, "subdomain", "app.example.com")
+        buckets = self.db.list_assets_by_type(target.id, "bucket")
+        self.assertEqual([a.value for a in buckets], ["example-bucket"])
+
+    def test_list_asset_values_by_types(self):
+        target = self.db.get_or_create_target("example.com")
+        self.db.add_asset(target.id, "endpoint", "https://app.example.com/a")
+        self.db.add_asset(target.id, "url", "https://app.example.com")
+        self.db.add_asset(target.id, "subdomain", "app.example.com")
+        values = self.db.list_asset_values_by_types(target.id, ("endpoint", "url"))
+        self.assertEqual(set(values), {"https://app.example.com/a", "https://app.example.com"})
+
     def test_scan_lifecycle(self):
         target = self.db.get_or_create_target("example.com")
         scan_id = self.db.start_scan(target.id, tier=0, tool_name="subfinder")

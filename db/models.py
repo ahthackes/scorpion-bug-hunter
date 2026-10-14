@@ -66,6 +66,12 @@ CREATE TABLE IF NOT EXISTS evidence (
     type            TEXT NOT NULL,
     file_path       TEXT NOT NULL
 );
+
+CREATE INDEX IF NOT EXISTS idx_assets_target_id ON assets(target_id);
+CREATE INDEX IF NOT EXISTS idx_assets_target_type ON assets(target_id, type);
+CREATE INDEX IF NOT EXISTS idx_scans_target_id ON scans(target_id);
+CREATE INDEX IF NOT EXISTS idx_findings_asset_id ON findings(asset_id);
+CREATE INDEX IF NOT EXISTS idx_evidence_finding_id ON evidence(finding_id);
 """
 
 
@@ -239,6 +245,28 @@ class Database:
                 AssetRow(r["id"], r["target_id"], r["type"], r["value"], r["discovered_by"])
                 for r in cur.fetchall()
             ]
+
+    def list_assets_by_type(self, target_id: int, type_: str) -> list[AssetRow]:
+        with self.cursor() as cur:
+            cur.execute(
+                "SELECT * FROM assets WHERE target_id = ? AND type = ?",
+                (target_id, type_),
+            )
+            return [
+                AssetRow(r["id"], r["target_id"], r["type"], r["value"], r["discovered_by"])
+                for r in cur.fetchall()
+            ]
+
+    def list_asset_values_by_types(self, target_id: int, types: tuple[str, ...]) -> list[str]:
+        if not types:
+            return []
+        placeholders = ",".join("?" for _ in types)
+        with self.cursor() as cur:
+            cur.execute(
+                f"SELECT value FROM assets WHERE target_id = ? AND type IN ({placeholders})",
+                (target_id, *types),
+            )
+            return [r["value"] for r in cur.fetchall()]
 
     # --- scans ---------------------------------------------------------------
 

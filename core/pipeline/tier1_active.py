@@ -198,7 +198,7 @@ def scan_buckets(
     per-subdomain, so this doesn't belong in the per-asset fan-out
     loop). Returns the number of findings persisted.
     """
-    buckets = [a for a in db.list_assets(target_id) if a.type == "bucket"]
+    buckets = db.list_assets_by_type(target_id, "bucket")
     if not buckets:
         return 0
     total = 0

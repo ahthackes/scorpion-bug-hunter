@@ -136,9 +136,7 @@ def _gather_known_urls(asset: AssetRow, live_url: str, db: Database) -> list[str
     1 (for uro) and once after (so batch 2 sees what batch 1 just found).
     """
     urls = {live_url}
-    for row in db.list_assets(asset.target_id):
-        if row.type in ("endpoint", "url"):
-            urls.add(row.value)
+    urls.update(db.list_asset_values_by_types(asset.target_id, ("endpoint", "url")))
     return sorted(urls)
 
 
