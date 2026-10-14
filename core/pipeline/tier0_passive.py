@@ -116,8 +116,11 @@ def _run_gau(root_domain: str, target_id: int, db: Database, config: dict, evide
         raw = module.run(root_domain, config)
         endpoints = module.parse(raw, root_domain)
         db.finish_scan(scan_id, status="completed")
-        for ep in endpoints:
-            db.add_asset(target_id, "endpoint", ep.value, discovered_by=ep.discovered_by)
+        db.add_assets_bulk(
+            target_id,
+            "endpoint",
+            [(ep.value, ep.discovered_by) for ep in endpoints],
+        )
         raw_file = evidence.save_raw(tier=0, asset_value=root_domain, tool_name="gau", raw_output=raw)
         evidence.record_step(
             tier=0, asset_value=root_domain, tool_name="gau",
@@ -150,8 +153,11 @@ def _run_asset_source(
         raw = module.run(root_domain, config)
         found = module.parse(raw, root_domain)
         db.finish_scan(scan_id, status="completed")
-        for item in found:
-            db.add_asset(target_id, asset_type, item.value, discovered_by=item.discovered_by)
+        db.add_assets_bulk(
+            target_id,
+            asset_type,
+            [(item.value, item.discovered_by) for item in found],
+        )
         raw_file = evidence.save_raw(tier=0, asset_value=root_domain, tool_name=module.name, raw_output=raw)
         evidence.record_step(
             tier=0, asset_value=root_domain, tool_name=module.name,

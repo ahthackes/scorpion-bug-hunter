@@ -238,6 +238,20 @@ class Database:
             row = cur.fetchone()
             return AssetRow(row["id"], row["target_id"], row["type"], row["value"], row["discovered_by"])
 
+    def add_assets_bulk(self, target_id: int, type_: str, items: list[tuple[str, str | None]]) -> int:
+        if not items:
+            return 0
+        discovered_at = _now()
+        with self.cursor() as cur:
+            cur.executemany(
+                """INSERT INTO assets (target_id, type, value, discovered_by, discovered_at)
+                   VALUES (?, ?, ?, ?, ?)
+                   ON CONFLICT(target_id, type, value) DO UPDATE SET discovered_by = excluded.discovered_by
+                """,
+                [(target_id, type_, value, discovered_by, discovered_at) for value, discovered_by in items],
+            )
+        return len(items)
+
     def list_assets(self, target_id: int) -> list[AssetRow]:
         with self.cursor() as cur:
             cur.execute("SELECT * FROM assets WHERE target_id = ?", (target_id,))

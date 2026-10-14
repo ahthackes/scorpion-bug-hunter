@@ -265,8 +265,11 @@ def _run_discovery_module(
         return 0
 
     db.finish_scan(scan_id, status="completed")
-    for ep in found:
-        db.add_asset(asset.target_id, "endpoint", ep.value, discovered_by=module.name)
+    db.add_assets_bulk(
+        asset.target_id,
+        "endpoint",
+        [(ep.value, module.name) for ep in found],
+    )
     raw_file = evidence.save_raw(tier=2, asset_value=url, tool_name=module.name, raw_output=raw)
     evidence.record_step(
         tier=2, asset_value=url, tool_name=module.name,

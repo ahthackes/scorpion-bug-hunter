@@ -486,8 +486,11 @@ def _run_live_url_modules(
         raw = module.run(live_url, config)
         endpoints = module.parse(raw, target_raw)
         db.finish_scan(scan_id, status="completed")
-        for ep in endpoints:
-            db.add_asset(asset.target_id, "endpoint", ep.value, discovered_by="katana")
+        db.add_assets_bulk(
+            asset.target_id,
+            "endpoint",
+            [(ep.value, "katana") for ep in endpoints],
+        )
         raw_file = evidence.save_raw(tier=1, asset_value=live_url, tool_name="katana", raw_output=raw)
         evidence.record_step(
             tier=1, asset_value=live_url, tool_name="katana",
@@ -567,8 +570,12 @@ def run(
         raw = module.run(asset.value, config)
         live_assets = module.parse(raw, target_raw)
         db.finish_scan(scan_id, status="completed")
+        db.add_assets_bulk(
+            asset.target_id,
+            "url",
+            [(live_asset.value, "httpx") for live_asset in live_assets],
+        )
         for live_asset in live_assets:
-            db.add_asset(asset.target_id, "url", live_asset.value, discovered_by="httpx")
             summary["live"] = True
             if live_url is None:
                 live_url = live_asset.value
@@ -602,8 +609,11 @@ def run(
         port_assets = module.parse(raw, target_raw)
         db.finish_scan(scan_id, status="completed")
         summary["open_ports"] = len(port_assets)
-        for port_asset in port_assets:
-            db.add_asset(asset.target_id, "ip", port_asset.value, discovered_by="naabu")
+        db.add_assets_bulk(
+            asset.target_id,
+            "ip",
+            [(port_asset.value, "naabu") for port_asset in port_assets],
+        )
         raw_file = evidence.save_raw(tier=1, asset_value=asset.value, tool_name="naabu", raw_output=raw)
         evidence.record_step(
             tier=1, asset_value=asset.value, tool_name="naabu",

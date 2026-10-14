@@ -54,6 +54,22 @@ class DatabaseTestCase(unittest.TestCase):
         values = self.db.list_asset_values_by_types(target.id, ("endpoint", "url"))
         self.assertEqual(set(values), {"https://app.example.com/a", "https://app.example.com"})
 
+    def test_add_assets_bulk_upserts_without_duplicates(self):
+        target = self.db.get_or_create_target("example.com")
+        count = self.db.add_assets_bulk(
+            target.id,
+            "endpoint",
+            [
+                ("https://app.example.com/a", "katana"),
+                ("https://app.example.com/a", "xnlinkfinder"),
+                ("https://app.example.com/b", "katana"),
+            ],
+        )
+        self.assertEqual(count, 3)
+        endpoints = self.db.list_assets_by_type(target.id, "endpoint")
+        self.assertEqual({a.value for a in endpoints}, {"https://app.example.com/a", "https://app.example.com/b"})
+        self.assertEqual({a.value: a.discovered_by for a in endpoints}["https://app.example.com/a"], "xnlinkfinder")
+
     def test_scan_lifecycle(self):
         target = self.db.get_or_create_target("example.com")
         scan_id = self.db.start_scan(target.id, tier=0, tool_name="subfinder")
