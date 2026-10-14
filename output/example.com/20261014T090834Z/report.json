@@ -1,0 +1,255 @@
+{
+  "target": {
+    "id": 1,
+    "raw_input": "example.com",
+    "program_name": null,
+    "status": "running"
+  },
+  "generated_at": "2026-10-14T09:08:34.494216+00:00",
+  "generated_by": "scorpion-bug-hunter",
+  "summary": {
+    "total_findings": 0,
+    "confirmed_findings": 0,
+    "severity_counts": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "info": 0
+    },
+    "asset_count": 1,
+    "scan_count": 22
+  },
+  "assets": [
+    {
+      "id": 1,
+      "target_id": 1,
+      "type": "domain",
+      "value": "example.com",
+      "discovered_by": "seed"
+    }
+  ],
+  "tool_coverage": [
+    {
+      "tool_name": "amass",
+      "tier": 0,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "asnmap",
+      "tier": 0,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "assetfinder",
+      "tier": 0,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "cero",
+      "tier": 0,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "chaos",
+      "tier": 0,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.04
+    },
+    {
+      "tool_name": "cloud-enum",
+      "tier": 0,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "gau",
+      "tier": 0,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "gitdorker",
+      "tier": 0,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "github-subdomains",
+      "tier": 0,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "gitlab-subdomains",
+      "tier": 0,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "subfinder",
+      "tier": 0,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "tlsx",
+      "tier": 0,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "cdncheck",
+      "tier": 1,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "dnsreaper",
+      "tier": 1,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "dnstwist",
+      "tier": 1,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "dnsx",
+      "tier": 1,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "httpx",
+      "tier": 1,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "naabu",
+      "tier": 1,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "puredns",
+      "tier": 1,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "shuffledns",
+      "tier": 1,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "subzy",
+      "tier": 1,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    },
+    {
+      "tool_name": "tlsx-posture",
+      "tier": 1,
+      "completed": 0,
+      "skipped": 1,
+      "failed": 0,
+      "running": 0,
+      "total_runs": 1,
+      "total_seconds": 0.0
+    }
+  ],
+  "findings": []
+}
